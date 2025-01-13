@@ -34,6 +34,7 @@ class Agent:
             model="llama3-70b-8192", messages=self.messages
         )
         return completion.choices[0].message.content
+    
 system_prompt = """
 You run in a loop of THOUGHT, ACTION, OBSERVATION.
 When you have a THOUGHT you return the THOUGHT and ACTION
@@ -45,6 +46,7 @@ OBSERVATION will be the result of running those ACTIONS.
 Your available ACTIONS are:
 
 # calculate_total:
+
 if amount = 200
 then calculate_total(amount)
 
