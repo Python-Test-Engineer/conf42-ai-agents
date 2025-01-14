@@ -3,7 +3,6 @@
 There are many definitons:
 
 Antrhopic
-Langchain
 Pydantic
 HuggingFace
 
