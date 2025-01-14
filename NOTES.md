@@ -98,3 +98,51 @@ There are many software design patterns but essentially the next step in the app
 In summary, this module has shown the 3 counter intuitive steps of AI Agents.
 
 # FAQ/ROUTER
+
+Sometimes we might think that AI Dev is binary - it is fully AI or not.
+
+What if we can include 'a bit of AI' in our App?
+
+If we have a Search, FAQ or Help section, we can leverage the power of the AI Agent to create a facility to process Natural Language. Getting information from a form, (excluding text fields), give us structured inout data.
+
+Let's look at `03_faq.ipynb` for a simple example.
+
+I am using Gradio as a UI for this example and we can see that we have some data in the FAQ list.
+
+Obviously, this can be more involved and use structured in puts from associated form fields, but for now lets assume that we have extracted the relevant information. This is RAG or Retrieval Augmented Generation, where we 'augment' the query with the relevant data and then the LLM 'generates' the response based on the query, the data and the prompt.
+
+We can see that we can create a powerful AI Agent that can answer questions based on the data in the FAQ list.
+
+We can further extend this to be a ROUTER to provide a sense of autonomy to the app. We know the overall workflow of the app but not how it goes from beginniong to end. We no longer micro-manage the app but delegate steps to the AI Agent, very much like we might manage a team member - mciro-manage or use delegation.
+
+In this example, we can let the AI Agent decide the next step to take.
+
+This was an example I had a codebar where a student wanted to get a job in AI/Python.
+
+I asked if they had an AI department where they currently worked and they said NO.
+
+When I asked what they did, the would be the person people went to for help in deciding which report to run and then they would run it.
+
+I said to them that they could create an AI version of themself for when they were away. The app could offer a chatbot type interaction, along with a set of structured form fields like date-to etc and then select the best report and run it.
+
+When they said "Replace me out of a job!" I said "yes and you will have a new job as head of the AI dept".
+
+We have not yet seen a multi agent scenario but I would describe this as everyday Python where we can use a range of Software Design Patterns like Author, Pub/Sub, Finite State Machine etc.
+
+We will take a look at this later.
+
+# Tools
+
+# ReAct
+
+# Reflection Pattern
+
+# Libraries
+
+## Pydantic AI
+
+## HF SmolAgents
+
+## Frameworks
+
+## Crews/Swarms
