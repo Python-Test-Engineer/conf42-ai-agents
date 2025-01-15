@@ -1,17 +1,28 @@
 # Welcome
 
-AI Agents, Crew and SwarmsWS
+Implementing Agentic AI Solutions in Python from scratch
+
+The repo is here: https://github.com/Python-Test-Engineer/conf42-ai-agents
+
+And I will be using NOTES.md for this talk along with code and the talk will be mostly code walkthroughs.
 
 ## Who am I?
 
 **I am one of *US* - a regular Pythonista.**
 
-Currently, I am also working on a project 'AI Powered Knowledge Systems', building a book/framework similiar to PFS.
+I was in tech in the early 2000s as a Business Information Arhctitect and Certified MicroSoft SQL Server DBA. I returned in 2017 via WordPress and JavaScript Frameworks, mving to Python and ML in 2021.
+
+Currently, I am working on a project 'AI Powered Knowledge Systems', building a book/framework similiar to PFS.
+
+My links:
+
+- https://ai-powered-knowledge-systems.netlify.app/
+- https://pytest-cookbook.com/
+- https://django-fullstack-testing.netlify.app/
 
 ### Brighton, UK
 
 ![Brighton](./images/brighton.jpg)
-
 
 ### Volounteer coach
 
@@ -19,7 +30,7 @@ I am a volounteer coach at codebar.io/brighton
 
 ![codebar](./images/codebar.png)
 
-and I also enjoy working in community kitchens, dogs and partner dancing.
+and I also enjoy working in community kitchens and partner dancing.
 
 ### Leo!
 
@@ -38,11 +49,9 @@ https://en.wikipedia.org/wiki/Punched_tape#/media/File:Creed_model_6S-2_paper_ta
 
 ...cut and paste was cut and paste!
 
-
 # What are AI Agents?
 
-
-There are many definitons:
+There are many definitions:
 
 Antrhopic
 
@@ -55,7 +64,6 @@ Pydantic
 HuggingFace
 
 ![HF](./images/what-is-agent-huggingface.png)
-
 
 We will look at examples of code to see what AI Agents are and what they can do.
 
@@ -86,11 +94,13 @@ Authentication takes place by passing some sort of token to the server, usually 
 
 ```
 model = "gpt-3.5-turbo"
+model_endpoint = "https://api.openai.com/v1/chat/completions"
 
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {self.api_key}",
 }
+
 payload = {
    "model": model,
    "messages": [
@@ -103,7 +113,7 @@ payload = {
 
 # Use HTTP POST method
 response = requests.post(
-   self.model_endpoint, headers=headers, data=json.dumps(payload)
+   model_endpoint, headers=headers, data=json.dumps(payload)
 ).json()
 
 ```
