@@ -76,9 +76,9 @@ If we look at https://aiagentsdirectory.com/ we can see that there are many exam
 
 
 ## Aim
-What I would like to achieve in this talk is to demystify AI Agents and AI Programming because it can seem like it is another world divorced from day to day or everyday Python. 
 
-(image)
+What I would like to achieve in this talk is to demystify AI Agents and AI Programming because it can seem like it is another different world of dev. 
+
 
 ## 180 degrees
 
