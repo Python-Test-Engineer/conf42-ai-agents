@@ -246,6 +246,21 @@ There are many frameworks and libraries that can be used to create AI Agents. So
 
 Crews and Swarms are design patterns for MultiAgent collaboration. They each have their own use cases and we saw earlier that AI Agents can emit the 'next' step in the app which a range of desing patterns can harness.
 
+- Langraph
+- AutoGen
+- CrewAI
+- and many more https://aiagentsdirectory.com/category/ai-agents-frameworks
+
+## 4 main patterns
+
+Andrew Ng describes four main patterns
+
+https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/
+
+![patterns](./images/4-patterns.png)
+
+We have seen examples of these in this talk, bar a multi-agent pattern.
+
 # Summary
 
 I hope AI Agents have been demystified and helped us understand what they can do, enabling us to either build our own frameworks or use existing ones, with a deeper appreciation and understanding of how they work.
