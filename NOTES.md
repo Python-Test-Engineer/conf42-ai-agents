@@ -1,23 +1,83 @@
+# Welcome
+
+AI Agents, Crew and SwarmsWS
+
+## Who am I?
+
+**I am one of *US* - a regular Pythonista.**
+
+Currently, I am also working on a project 'AI Powered Knowledge Systems', building a book/framework similiar to PFS.
+
+### Brighton, UK
+
+![Brighton](./images/brighton.jpg)
+
+
+### Volounteer coach
+
+I am a volounteer coach at codebar.io/brighton 
+
+![codebar](./images/codebar.png)
+
+and I also enjoy working in community kitchens, dogs and partner dancing.
+
+### Leo!
+
+Just got a Red Fox Labrador Pup Leo, (much earlier than planned):
+
+![Leo](./images/leo-carrot.png)
+
+We have a local red fox that is apt to follow us...
+
+![Leo](./images/leo-fox.jpg)
+
+### My first computer 1979
+
+![tape](./images/paper-tape.jpg)
+https://en.wikipedia.org/wiki/Punched_tape#/media/File:Creed_model_6S-2_paper_tape_reader.jpg
+
+...cut and paste was cut and paste!
+
+
 # What are AI Agents?
+
 
 There are many definitons:
 
 Antrhopic
+
+![Anthropic](./images/what-is-agent-anthropic.png)
+
 Pydantic
+
+![Pydantic](./images/what-is-agent-pydantic.png)
+
 HuggingFace
+
+![HF](./images/what-is-agent-huggingface.png)
+
 
 We will look at examples of code to see what AI Agents are and what they can do.
 
 If we look at https://aiagentsdirectory.com/ we can see that there are many examples of AI Agent Frameworks and they seem to increase each week.
 
-What I would like to achieve in this talk is to demystify AI Agents and AI Programming because it can seem like it is another world divorced from day to day or everyday Python. (image)
+
+## Aim
+What I would like to achieve in this talk is to demystify AI Agents and AI Programming because it can seem like it is another world divorced from day to day or everyday Python. 
+
+(image)
+
+## 180 degrees
+
+![mouse up](./images/mouse-up.jpg)
+![mouse down](./images/mouse-down.jpg)
 
 I like to use the metaphor of the upside down computer mouse. When we try to use it, it can take while to reverse our apporach. It is still the same set of movements - left, right, up and down - but in the opposite way to the way we are used to.
 
 There are 3 areas concerning this.
 
-1. Autonomy
-2. Client side creation of endpoints (APIs)
+1. Autonomy.
+2. Client side creation of endpoints (APIs).
 3. Use of Natural Language, in my case English to create the code.
 
 Before we go into some code examples, we will refresh ourselves that a REST API a request is sending a payload of data to a server and then the server returns a response. This is a very simple example of a REST API. 
@@ -132,16 +192,45 @@ We will take a look at this later.
 
 # Tools
 
+`04_tools.ipynb` shows not just how we define tools but also how an Agent can decide which one to take. It is another example of the Router pattern. This can be refactored into separate Ai Agents to be more Pythonic but there are cases where we might want an AI Agent to have a range of tools availabe rather than route to another Agent. It is the classic case of how much refactoring serves us best.
+
+Let's go through this example.
+
 # ReAct
+
+A powerful pattern is the ReasonAct pattern.
+
+This can be viewed of as Multi-Step. Let's go through the code.
 
 # Reflection Pattern
 
+Many times when we use ChatGPT say, we ask for it to refine its previous answer. This is the Reflection pattern where we send the previous response and then ask it to refine it.
+
+`25_reflection_pattern.ipynb` shows how we can use this pattern.
+
 # Libraries
+
+I like to think of Libraries as frameworks without the framework! By this I mean we get building blocks to help us build things without having to conform to a building plan.
 
 ## Pydantic AI
 
+Pydantic is well known in everyday Python and is used by most AI Agent frameworks as structured data validation is vital.
+
+PydanticAI is a library/framework that uses Pydantic to create AI Agents.
+
 ## HF SmolAgents
+
+HF SmolAgents is a library/framework that uses Huggingface Transformers to create AI Agents. It has broken new ground throught the use of its CodeAgent where tool calling is done via Python rather than JSON...show images...
 
 ## Frameworks
 
+There are many frameworks and libraries that can be used to create AI Agents. Some are more focused on the AI Agent and some are more focused on the UI.
+
+
 ## Crews/Swarms
+
+Crews and Swarms are design patterns for MultiAgent collaboration. They each have their own use cases and we saw earlier that AI Agents can emit the 'next' step in the app which a range of desing patterns can harness.
+
+# Summary
+
+I hope AI Agents have been demystified and helped us understand what they can do, enabling us to either build our own frameworks or use existing ones, with a deeper appreciation and understanding of how they work.
