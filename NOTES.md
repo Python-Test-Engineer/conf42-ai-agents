@@ -4,6 +4,10 @@ Implementing Agentic AI Solutions in Python from scratch
 
 The repo is here: https://github.com/Python-Test-Engineer/conf42-ai-agents
 
+
+<img src="./images/QRgithubconf42.png" width="300" height="300">
+
+<br>
 And I will be using NOTES.md for this talk along with code and the talk will be mostly code walkthroughs.
 
 ## Who am I?
@@ -22,13 +26,13 @@ My links:
 
 ### Brighton, UK
 
-![Brighton](./images/brighton.jpg)
+<img src="./images/brighton.jpg" width="400" height="400">
 
 ### Volounteer coach
 
 I am a volounteer coach at codebar.io/brighton 
 
-![codebar](./images/codebar.png)
+<img src="./images/codebar.png" width="400" >
 
 and I also enjoy working in community kitchens and partner dancing.
 
@@ -40,11 +44,12 @@ Just got a Red Fox Labrador Pup Leo, (much earlier than planned):
 
 We have a local red fox that is apt to follow us...
 
-![Leo](./images/leo-fox.jpg)
+<img src="./images/leo-fox-2.png" width="400" >
 
 ### My first computer 1979
 
-![tape](./images/paper-tape.jpg)
+!<img src="./images/paper-tape.jpg" width="400" >
+
 https://en.wikipedia.org/wiki/Punched_tape#/media/File:Creed_model_6S-2_paper_tape_reader.jpg
 
 ...cut and paste was cut and paste!
