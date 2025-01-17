@@ -1,5 +1,5 @@
 # Welcome
-
+<!-- https://mconverter.eu/convert/markdown/html/ -->
 Implementing Agentic AI Solutions in Python from scratch
 
 The repo is here: https://github.com/Python-Test-Engineer/conf42-ai-agents
@@ -250,7 +250,7 @@ Pydantic is well known in everyday Python and is used by most AI Agent framework
 
 PydanticAI is a library/framework that uses Pydantic to create AI Agents.
 
-## HF SmolAgents
+## Huggingface SmolAgents
 
 HF SmolAgents is a library/framework that uses Huggingface Transformers to create AI Agents. It has broken new ground throught the use of its CodeAgent where tool calling is done via Python rather than JSON...show images...
 
@@ -258,15 +258,20 @@ HF SmolAgents is a library/framework that uses Huggingface Transformers to creat
 
 There are many frameworks and libraries that can be used to create AI Agents. Some are more focused on the AI Agent and some are more focused on the UI.
 
+LlamaIndex
+Langchain
+Langraph
+AutoGen
+CrewAI
+
+And there are many low/no code versions.
+
 
 ## Crews/Swarms
 
 Crews and Swarms are design patterns for MultiAgent collaboration. They each have their own use cases and we saw earlier that AI Agents can emit the 'next' step in the app which a range of desing patterns can harness.
 
-- Langraph
-- AutoGen
-- CrewAI
-- and many more https://aiagentsdirectory.com/category/ai-agents-frameworks
+- https://aiagentsdirectory.com/category/ai-agents-frameworks
 
 ## 4 main patterns
 
