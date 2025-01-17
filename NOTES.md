@@ -4,17 +4,18 @@ Implementing Agentic AI Solutions in Python from scratch
 
 The repo is here: https://github.com/Python-Test-Engineer/conf42-ai-agents
 
+QR Code:
 
-<img src="./images/QRgithubconf42.png" width="300" height="300">
+<!-- <img src="" width="300" height="300"> -->
 
 <br>
-And I will be using NOTES.md for this talk along with code and the talk will be mostly code walkthroughs.
+And I will be using NOTES.md/NOTES.html for this talk along with code and the talk will be mostly code walkthroughs.
 
 ## Who am I?
 
 **I am one of *US* - a regular Pythonista.**
 
-I was in tech in the early 2000s as a Business Information Arhctitect and Certified MicroSoft SQL Server DBA. I returned in 2017 via WordPress and JavaScript Frameworks, mving to Python and ML in 2021.
+I was in tech in the early 2000s as a Business Information Architect and Certified MicroSoft SQL Server DBA. I returned in 2017 via WordPress and JavaScript Frameworks, moving to Python and ML in 2021.
 
 Currently, I am working on a project 'AI Powered Knowledge Systems', building a book/framework similiar to PFS.
 
@@ -58,15 +59,15 @@ https://en.wikipedia.org/wiki/Punched_tape#/media/File:Creed_model_6S-2_paper_ta
 
 There are many definitions:
 
-Antrhopic
+## Anthropic
 
 ![Anthropic](./images/what-is-agent-anthropic.png)
 
-Pydantic
+## Pydantic
 
 ![Pydantic](./images/what-is-agent-pydantic.png)
 
-HuggingFace
+## HuggingFace
 
 ![HF](./images/what-is-agent-huggingface.png)
 
@@ -74,11 +75,11 @@ We will look at examples of code to see what AI Agents are and what they can do.
 
 If we look at https://aiagentsdirectory.com/ we can see that there are many examples of AI Agent Frameworks and they seem to increase each week.
 
-
 ## Aim
 
 What I would like to achieve in this talk is to demystify AI Agents and AI Programming because it can seem like it is another different world of dev. 
 
+What if AI Agents were 'just' Python code with a REST API call, admittedly a very magical API?
 
 ## 180 degrees
 
@@ -89,8 +90,8 @@ I like to use the metaphor of the upside down computer mouse. When we try to use
 
 There are 3 areas concerning this.
 
-1. Autonomy.
-2. Client side creation of endpoints (APIs).
+1. Autonomy - the LLM directs the flow of the app.
+2. Client side creation of endpoints (APIs) rather than server side prebuilt endpoints.
 3. Use of Natural Language, in my case English to create the code.
 
 Before we go into some code examples, we will refresh ourselves that a REST API a request is sending a payload of data to a server and then the server returns a response. This is a very simple example of a REST API. 
@@ -118,28 +119,32 @@ payload = {
 
 # Use HTTP POST method
 response = requests.post(
-   model_endpoint, headers=headers, data=json.dumps(payload)
+   url=model_endpoint, # The API
+   headers=headers, # Headers fro authentication etc
+   data=json.dumps(payload) # The request data we are sending
 ).json()
 
 ```
 
 The request is a string of characters and does not contain any objects or other data types.
 
-In JS it is common to use json.stringify() to send the request.
+In Python we stringify the data with json.dumps() and in JS it is common to use json.stringify() to send the request.
 
 Likewise, we get a string response.
 
-We can see this in `01_openai_api_with_requests.ipynb`.
+We will look at `00_base.ipynb` to see an example of getting a response from the LLM.
 
-*There is only one endpoint.*
+`01_openai_api_with_requests.ipynb`.
 
-in `01_openai_api_with_requests_with_endpoint.ipynb`, we can see that we can get a joke from a regular API endpoint, withthe assumption that there is no AI involved!
+*There is only one endpoint.* We don't use other endpoints for differing tasks, there is just one end point and we create our custom endpoint through prompt engineering.
+
+in `01_openai_api_with_requests_with_endpoint.ipynb`, we can see that we can get a joke from a regular API endpoint, with the assumption that there is no AI involved!
 
 We can also ask OpenAI to tell us a joke...
 
-What if we want a more compled endpoint?
+What if we want a more complex endpoint?
 
-Let's say we want to get a joke, get a rating as well as a verdict on whether it is worthy of publishing or not.
+Let's say we want to get a joke, get a rating as well as a verdict on whether it is worthy of publishing or whether a HUMAN should tell us the joke.
 
 We can do this by using a prompt.
 
@@ -147,11 +152,13 @@ The prompt is the input to the AI agent.
 
 We can see this in `01_openai_api_with_requests_with_prompt.ipynb` where we pass a system prompt and then a propmt to create this endpoint, specifying how we want the data returned.
 
-For instructional purposes, I have wrapped the JOSN schema in pipes to ensure extraction. We will look at the issue of Structured Output later, but for now I will use this.
+For instructional purposes, I have wrapped the JSON schema in pipes to help with extraction. We will look at the issue of Structured Output later, but for now I will use this. Structured Ouput is a very critical aspect of AI Agents as this enables effective chaining from one AI Agent to another.
 
 This is effectively a new route for the API, but instead of it being coded on the server side by someone, it is coded on the client side, sent with the payload AND the code is NATURAL LANGUAGE.
 
 In the early days of ChatGPT, *prompt engineering* was often demoed as hacks or tricks. Nowdays, it seems far more structured and different LLMs use different schemas.
+
+We can think of it as pseudo-code which we may write whilst developing an app.
 
 (Examples...)
 
@@ -161,21 +168,21 @@ We set the system prompt to guide the AI agent, and then the prompt to create th
 
 We can have more information than necessary and this can do no harm provide it is consistent and logical with the remaining prompt. Obviously, there will be more token usage but with the price going down, it is not an issue.
 
-We have covered 2/3 of the AI reverse process - Client SIde creation of the route and the use of Natural Language.
+We have covered 2/3 of the AI reverse process - Client Side creation of the route and the use of Natural Language.
 
 What about Autonomy?
 
-In our output, we asked the LLM to give not just a rating but a verdict on whether it is worthy of publishing or not. This is the `next` parameter that is returned.
+In our output, we asked the LLM to give not just a rating but a verdict on whether it is worthy of publishing or not. This is the `next` parameter that is returned. This is our own creation and we can have any key name.
 
 There are many software design patterns but essentially the next step in the app has been selected by the LLM. It is the `if/else` statement. or router.
 
-In summary, this module has shown the 3 counter intuitive steps of AI Agents.
+In summary, this module has shown the 3 counter-intuitive steps of AI Agents - Autonomy, Client Side Creation of the route and the use of Natural Language.
 
 # FAQ/ROUTER
 
-Sometimes we might think that AI Dev is binary - it is fully AI or not.
+Sometimes we might think that AI Development is binary - it is fully AI or not.
 
-What if we can include 'a bit of AI' in our App?
+What if we can include 'a bit of AI' in our App? Remember, AI Agents are snippets of code that make a request and get a response.
 
 If we have a Search, FAQ or Help section, we can leverage the power of the AI Agent to create a facility to process Natural Language. Getting information from a form, (excluding text fields), give us structured inout data.
 
@@ -183,31 +190,41 @@ Let's look at `03_faq.ipynb` for a simple example.
 
 I am using Gradio as a UI for this example and we can see that we have some data in the FAQ list.
 
-Obviously, this can be more involved and use structured in puts from associated form fields, but for now lets assume that we have extracted the relevant information. This is RAG or Retrieval Augmented Generation, where we 'augment' the query with the relevant data and then the LLM 'generates' the response based on the query, the data and the prompt.
+Obviously, this can be more involved and use structured inputs from associated form fields, but for now lets assume that we have extracted the relevant information. 
+
+This highlights an important point that we don't need to use LLMs for Agents. If we can get structured data from a form, then it is more deterministic to do so. LLMs are very useful for converting Natural Language inputs to structured data.
+
+This is RAG or Retrieval Augmented Generation, where we 'augment' the query with the relevant data and then the LLM 'generates' the response based on the query, the data and the prompt. We tend to see RAG with vector databases and semantic search but RAG is essentially augmenting the LLM with our own data to 'train' it or 'fine tune'.
 
 We can see that we can create a powerful AI Agent that can answer questions based on the data in the FAQ list.
 
-We can further extend this to be a ROUTER to provide a sense of autonomy to the app. We know the overall workflow of the app but not how it goes from beginniong to end. We no longer micro-manage the app but delegate steps to the AI Agent, very much like we might manage a team member - mciro-manage or use delegation.
+We can further extend this to be a type of ROUTER or *if/else* statement to provide a sense of autonomy to the app - it will direct the flow of the app. We can have 'Human in the Loop' at any stage so that we restrict the flow to approved paths.
+
+ We know the overall workflow of the app but not how it goes from beginning to end. We no longer micro-manage the app but delegate steps to the AI Agent, very much like we might manage a team member - mciro-manage or use delegation.
 
 In this example, we can let the AI Agent decide the next step to take.
 
-This was an example I had a codebar where a student wanted to get a job in AI/Python.
+This was an example I had at a codebar coaching session where a student wanted to get a job in AI/Python.
 
 I asked if they had an AI department where they currently worked and they said NO.
 
-When I asked what they did, the would be the person people went to for help in deciding which report to run and then they would run it.
+When I asked what they did, they would be the person people went to for help in deciding which report to run and then they would run it and send them the final report.
 
 I said to them that they could create an AI version of themself for when they were away. The app could offer a chatbot type interaction, along with a set of structured form fields like date-to etc and then select the best report and run it.
 
-When they said "Replace me out of a job!" I said "yes and you will have a new job as head of the AI dept".
+When they said "And replace me out of a job!" I said "yes..you will have a new job as head of the AI dept team".
+
+Let's look at `04_agent_router.ipynb` as a very basic example of what they could do...I have included aditional non-relevant reports/actions for demonstration purposes.
 
 We have not yet seen a multi agent scenario but I would describe this as everyday Python where we can use a range of Software Design Patterns like Author, Pub/Sub, Finite State Machine etc.
 
 We will take a look at this later.
 
+I think we can see that what we call these things - Agents, Tools, Routers - is quite arbitrary and merely a convenience for what works for us. At the end of the day, everything in Python is an OBJECT, so we can use whatever we want.
+
 # Tools
 
-`04_tools.ipynb` shows not just how we define tools but also how an Agent can decide which one to take. It is another example of the Router pattern. This can be refactored into separate Ai Agents to be more Pythonic but there are cases where we might want an AI Agent to have a range of tools availabe rather than route to another Agent. It is the classic case of how much refactoring serves us best.
+`05_tools.ipynb` shows not just how we define tools but also how an Agent can decide which one to take. It is another example of the Router pattern. This can be refactored into separate Ai Agents to be more Pythonic but there are cases where we might want an AI Agent to have a range of tools availabe rather than route to another Agent. It is the classic case of how much refactoring serves us best.
 
 Let's go through this example.
 
