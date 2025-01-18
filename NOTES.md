@@ -73,7 +73,7 @@ There are many definitions:
 
 We will look at examples of code to see what AI Agents are and what they can do.
 
-If we look at https://aiagentsdirectory.com/ we can see that there are many examples of AI Agent Frameworks and they seem to increase each week.
+If we look at https://aiagentsdirectory.com/landscape we can see that there are many examples of AI Agent Frameworks and they seem to increase each week.
 
 ## Aim
 
@@ -90,9 +90,9 @@ I like to use the metaphor of the upside down computer mouse. When we try to use
 
 There are 3 areas concerning this.
 
-1. Autonomy - the LLM directs the flow of the app.
-2. Client side creation of endpoints (APIs) rather than server side prebuilt endpoints.
-3. Use of Natural Language, in my case English to create the code.
+1. Client side creation of endpoints (APIs) rather than server side prebuilt endpoints.
+2. Use of Natural/Human Language, in my case English to create the code.
+3. Autonomy - the LLM directs the flow of the app.
 
 Before we go into some code examples, we will refresh ourselves that a REST API a request is sending a payload of data to a server and then the server returns a response. This is a very simple example of a REST API. 
 
@@ -104,17 +104,17 @@ model_endpoint = "https://api.openai.com/v1/chat/completions"
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": f"Bearer {self.api_key}",
+    "Authorization": f"Bearer {api_key}",
 }
 
 payload = {
    "model": model,
    "messages": [
-       {"role": "system", "content": self.system_prompt},
-       {"role": "user", "content": prompt},
+       {"role": "system", "content": system_prompt},
+       {"role": "user", "content": user_prompt},
    ],
    "stream": False,
-   "temperature": temperature,
+   "temperature": temperature, 
 }
 
 # Use HTTP POST method
