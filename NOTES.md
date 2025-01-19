@@ -228,6 +228,14 @@ I think we can see that what we call these things - Agents, Tools, Routers - is 
 
 Let's go through this example.
 
+Where is it run?
+
+## From OpenAI website
+
+![open-ai](./images/where-tools-are-executed.png)
+
+We add more messages to pass on the next request.
+
 # ReAct
 
 A powerful pattern is the ReasonAct pattern.
