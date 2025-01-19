@@ -235,32 +235,55 @@ Where is it run?
 ![open-ai](./images/where-tools-are-executed.png)
 
 We add more messages to pass on the next request.
+# 4 main patterns
 
-# ReAct
+Andrew Ng describes four main patterns
 
-A powerful pattern is the ReasonAct pattern.
+https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/
 
-This can be viewed of as Multi-Step. Let's go through the code.
+![patterns](./images/4-patterns.png)
 
-# Reflection Pattern
+We have seen examples of these in this talk, bar a multi-agent pattern.
+
+
+## REFLECTION PATTERN
 
 Many times when we use ChatGPT say, we ask for it to refine its previous answer. This is the Reflection pattern where we send the previous response and then ask it to refine it.
 
 `25_reflection_pattern.ipynb` shows how we can use this pattern.
 
-# Libraries
+## ReAct 
+
+A powerful pattern is the ReasonAct pattern.
+
+This can be viewed of as Multi-Step. Let's go through the code.
+
+## TOOL
+
+We have seen Tool Calling previously.
+
+## MULTI AGENT
+
+### Libraries
 
 I like to think of Libraries as frameworks without the framework! By this I mean we get building blocks to help us build things without having to conform to a building plan.
 
-## Pydantic AI
+#### Pydantic AI
 
 Pydantic is well known in everyday Python and is used by most AI Agent frameworks as structured data validation is vital.
 
 PydanticAI is a library/framework that uses Pydantic to create AI Agents.
 
-## Huggingface SmolAgents
+#### Huggingface SmolAgents
 
 HF SmolAgents is a library/framework that uses Huggingface Transformers to create AI Agents. It has broken new ground throught the use of its CodeAgent where tool calling is done via Python rather than JSON...show images...
+
+### Crews/Swarms
+
+Crews and Swarms are design patterns for MultiAgent collaboration. They each have their own use cases and we saw earlier that AI Agents can emit the 'next' step in the app which a range of desing patterns can harness.
+
+- https://aiagentsdirectory.com/category/ai-agents-frameworks
+
 
 ## Frameworks
 
@@ -275,21 +298,8 @@ CrewAI
 And there are many low/no code versions.
 
 
-## Crews/Swarms
 
-Crews and Swarms are design patterns for MultiAgent collaboration. They each have their own use cases and we saw earlier that AI Agents can emit the 'next' step in the app which a range of desing patterns can harness.
 
-- https://aiagentsdirectory.com/category/ai-agents-frameworks
-
-## 4 main patterns
-
-Andrew Ng describes four main patterns
-
-https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/
-
-![patterns](./images/4-patterns.png)
-
-We have seen examples of these in this talk, bar a multi-agent pattern.
 
 # Summary
 
