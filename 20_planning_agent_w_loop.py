@@ -2,6 +2,7 @@
 
 import os
 from groq import Groq
+
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 chat_completion = client.chat.completions.create(
@@ -10,8 +11,10 @@ chat_completion = client.chat.completions.create(
     temperature=0,
 )
 
-
+print("Test...")
 print(chat_completion.choices[0].message.content)
+
+
 class Agent:
     def __init__(self, client: Groq, system: str = "") -> None:
         self.client = client
@@ -34,7 +37,8 @@ class Agent:
             model="llama3-70b-8192", messages=self.messages
         )
         return completion.choices[0].message.content
-    
+
+
 system_prompt = """
 You run in a loop of THOUGHT, ACTION, OBSERVATION.
 When you have a THOUGHT you return the THOUGHT and ACTION
@@ -100,6 +104,8 @@ def get_product_price(product):
         return 300
 
     return None
+
+
 # We now loop over the query until an answer is found or the'max_iterations' is reached
 
 answers = []
