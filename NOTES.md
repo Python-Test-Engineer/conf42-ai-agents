@@ -81,6 +81,10 @@ What I would like to achieve in this talk is to demystify AI Agents and AI Progr
 
 What if AI Agents were 'just' Python code with a REST API call, admittedly a very magical API?
 
+Then, we would use day to day Python design patterns to handle the responses we get back from the AI Agent and move on to the next step.
+
+This is the main focus of the talk - demystify and simplify - and not to focus on an actual real workd application.
+
 ## 180 degrees
 
 ![mouse up](./images/mouse-up.jpg)
