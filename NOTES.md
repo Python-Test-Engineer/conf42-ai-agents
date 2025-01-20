@@ -4,9 +4,6 @@ Implementing Agentic AI Solutions in Python from scratch
 
 The repo is here: https://github.com/Python-Test-Engineer/conf42-ai-agents
 
-QR Code:
-
-<!-- <img src="" width="300" height="300"> -->
 
 <br>
 And I will be using NOTES.md/NOTES.html for this talk along with code and the talk will be mostly code walkthroughs.
@@ -59,13 +56,13 @@ https://en.wikipedia.org/wiki/Punched_tape#/media/File:Creed_model_6S-2_paper_ta
 
 There are many definitions:
 
-## Anthropic
-
-![Anthropic](./images/what-is-agent-anthropic.png)
-
 ## Pydantic
 
 ![Pydantic](./images/what-is-agent-pydantic.png)
+
+## Anthropic
+
+![Anthropic](./images/what-is-agent-anthropic.png)
 
 ## HuggingFace
 
@@ -85,6 +82,8 @@ Then, we would use day to day Python design patterns to handle the responses we 
 
 This is the main focus of the talk - demystify and simplify - and not to focus on an actual real workd application.
 
+With that in mind, we don't need to fully grasp the code this time around. It is more about see the high level view and once can dig deeper into the code offline.
+
 ## 180 degrees
 
 ![mouse up](./images/mouse-up.jpg)
@@ -99,6 +98,8 @@ There are 3 areas concerning this.
 3. Autonomy - the LLM directs the flow of the app.
 
 Before we go into some code examples, we will refresh ourselves that a REST API a request is sending a payload of data to a server and then the server returns a response. This is a very simple example of a REST API. 
+
+Again, this is to demystify and simplify any libraries we may import for convenience functions.
 
 Authentication takes place by passing some sort of token to the server, usually in the headers:
 
@@ -136,7 +137,7 @@ In Python we stringify the data with json.dumps() and in JS it is common to use 
 
 Likewise, we get a string response.
 
-We will look at `00_base.ipynb` to see an example of getting a response from the LLM.
+We will look at `01_openai_api_with_requests.ipynb` to see an example of getting a response from the LLM.
 
 `01_openai_api_with_requests.ipynb`.
 
@@ -146,15 +147,19 @@ in `01_openai_api_with_requests_with_endpoint.ipynb`, we can see that we can get
 
 We can also ask OpenAI to tell us a joke...
 
-What if we want a more complex endpoint?
+What if we want a more complex API endpoint/route?
 
-Let's say we want to get a joke, get a rating as well as a verdict on whether it is worthy of publishing or whether a HUMAN should tell us the joke.
+Let's say we want to get a joke, get a rating as well as a verdict on whether it is worthy of publishing or whether a HUMAN should make the joke for publishing.
 
 We can do this by using a prompt.
 
-The prompt is the input to the AI agent.    
+The prompt is the input to the AI agent.
 
-We can see this in `01_openai_api_with_requests_with_prompt.ipynb` where we pass a system prompt and then a propmt to create this endpoint, specifying how we want the data returned.
+The prompt can be considered to be the API route we are creating and it it will be in Natural Language. 
+
+Let's look at this file...
+
+We can see this in `01_openai_api_with_requests_with_prompt.ipynb` where we pass a system prompt and then a prompt to create this endpoint, specifying how we want the data returned.
 
 For instructional purposes, I have wrapped the JSON schema in pipes to help with extraction. We will look at the issue of Structured Output later, but for now I will use this. Structured Ouput is a very critical aspect of AI Agents as this enables effective chaining from one AI Agent to another.
 
@@ -163,8 +168,6 @@ This is effectively a new route for the API, but instead of it being coded on th
 In the early days of ChatGPT, *prompt engineering* was often demoed as hacks or tricks. Nowdays, it seems far more structured and different LLMs use different schemas.
 
 We can think of it as pseudo-code which we may write whilst developing an app.
-
-(Examples...)
 
 In fact, it is like a person starting a new job. They will get a handbook of what the job involves, how to do it etc. and this is what we are doing with the LLM. 
 
@@ -218,7 +221,7 @@ I said to them that they could create an AI version of themself for when they we
 
 When they said "And replace me out of a job!" I said "yes..you will have a new job as head of the AI dept team".
 
-Let's look at `04_agent_router.ipynb` as a very basic example of what they could do...I have included aditional non-relevant reports/actions for demonstration purposes.
+Let's look at `04_agent_router.ipynb` as a very basic example of what they could do...I have included additional non-relevant reports/actions for demonstration purposes.
 
 We have not yet seen a multi agent scenario but I would describe this as everyday Python where we can use a range of Software Design Patterns like Author, Pub/Sub, Finite State Machine etc.
 
@@ -228,17 +231,19 @@ I think we can see that what we call these things - Agents, Tools, Routers - is 
 
 # Tools
 
-`05_tools.ipynb` shows not just how we define tools but also how an Agent can decide which one to take. It is another example of the Router pattern. This can be refactored into separate Ai Agents to be more Pythonic but there are cases where we might want an AI Agent to have a range of tools availabe rather than route to another Agent. It is the classic case of how much refactoring serves us best.
+`05_tools.ipynb` shows not just how we define tools but also how an Agent can decide which one to use.
 
-Let's go through this example.
+It will then send back the function name and arguments for us to run and then return the result.
 
 Where is it run?
 
 ## From OpenAI website
 
+Function is run on our 'box' - we continue to add messages to our list of messages and send them to the LLM.
+
 ![open-ai](./images/where-tools-are-executed.png)
 
-We add more messages to pass on the next request.
+
 # 4 main patterns
 
 Andrew Ng describes four main patterns
@@ -249,22 +254,21 @@ https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/
 
 We have seen examples of these in this talk, bar a multi-agent pattern.
 
-
 ## REFLECTION PATTERN
 
 Many times when we use ChatGPT say, we ask for it to refine its previous answer. This is the Reflection pattern where we send the previous response and then ask it to refine it.
 
-`25_reflection_pattern.ipynb` shows how we can use this pattern.
-
-## ReAct 
-
-A powerful pattern is the ReasonAct pattern.
-
-This can be viewed of as Multi-Step. Let's go through the code.
+`20_reflection_pattern.ipynb` shows how we can use this pattern.
 
 ## TOOL
 
 We have seen Tool Calling previously.
+
+## Planning 
+
+A powerful pattern is the ReAct (Reason-Act) pattern.
+
+This can be viewed of as Multi-Step. Let's go through the code.
 
 ## MULTI AGENT
 
@@ -301,10 +305,8 @@ CrewAI
 
 And there are many low/no code versions.
 
-
-
-
-
 # Summary
 
 I hope AI Agents have been demystified and helped us understand what they can do, enabling us to either build our own frameworks or use existing ones, with a deeper appreciation and understanding of how they work.
+
+![when to use](./images/when-to-use-anthropic.png)
