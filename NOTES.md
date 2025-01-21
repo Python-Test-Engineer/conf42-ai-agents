@@ -264,7 +264,7 @@ Many times when we use ChatGPT say, we ask for it to refine its previous answer.
 
 We have seen Tool Calling previously.
 
-## Planning 
+## PLANNING 
 
 A powerful pattern is the ReAct (Reason-Act) pattern.
 
