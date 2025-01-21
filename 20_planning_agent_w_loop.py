@@ -15,17 +15,9 @@ if openai_api_key:
     print(f"OpenAI API Key exists and begins:{openai_api_key[:10]}")
 else:
     print("OpenAI API Key not set")
+
 client = OpenAI()
 MODEL = "gpt-4o-mini"
-
-chat_completion = client.chat.completions.create(
-    messages=[{"role": "user", "content": "What is an AI Agent?"}],
-    model=MODEL,
-    temperature=0,
-)
-
-print("Test...")
-print(chat_completion.choices[0].message.content)
 
 
 class Agent:
