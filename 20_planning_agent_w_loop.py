@@ -1,22 +1,27 @@
 # set GROQ_API_KEY in the secrets
 
 import os
-from groq import Groq
 
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+from openai import OpenAI
+from dotenv import load_dotenv
 
-chat_completion = client.chat.completions.create(
-    messages=[{"role": "user", "content": "What is an AI Agent?"}],
-    model="llama3-8b-8192",
-    temperature=0,
-)
+# Load environment variables in a file called .env
+# Print the key prefixes to help with any debugging
 
-print("Test...")
-print(chat_completion.choices[0].message.content)
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
+if openai_api_key:
+    print(f"OpenAI API Key exists and begins:{openai_api_key[:10]}")
+else:
+    print("OpenAI API Key not set")
+
+client = OpenAI()
+MODEL = "gpt-4o-mini"
 
 
 class Agent:
-    def __init__(self, client: Groq, system: str = "") -> None:
+    def __init__(self, client: client, system: str = "") -> None:
         self.client = client
         self.system = system
         self.messages: list = []
@@ -33,9 +38,7 @@ class Agent:
             print("NO MESSAGE")
 
     def execute(self):
-        completion = client.chat.completions.create(
-            model="llama3-70b-8192", messages=self.messages
-        )
+        completion = client.chat.completions.create(model=MODEL, messages=self.messages)
         return completion.choices[0].message.content
 
 

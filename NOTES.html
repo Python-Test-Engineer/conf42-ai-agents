@@ -174,9 +174,6 @@
 <p>Implementing Agentic AI Solutions in Python from scratch</p>
 <p>The repo is here:
 https://github.com/Python-Test-Engineer/conf42-ai-agents</p>
-<p>QR Code:</p>
-<!-- <img src="" width="300" height="300"> -->
-
 <br>
 And I will be using NOTES.md/NOTES.html for this talk along with code and the talk will be mostly code walkthroughs.
 
@@ -214,11 +211,11 @@ dancing.</p>
 <p>…cut and paste was cut and paste!</p>
 <h1 id="what-are-ai-agents">What are AI Agents?</h1>
 <p>There are many definitions:</p>
+<h2 id="pydantic">Pydantic</h2>
+<p><img src="./images/what-is-agent-pydantic.png" alt="Pydantic" /></p>
 <h2 id="anthropic">Anthropic</h2>
 <p><img src="./images/what-is-agent-anthropic.png"
 alt="Anthropic" /></p>
-<h2 id="pydantic">Pydantic</h2>
-<p><img src="./images/what-is-agent-pydantic.png" alt="Pydantic" /></p>
 <h2 id="huggingface">HuggingFace</h2>
 <p><img src="./images/what-is-agent-huggingface.png" alt="HF" /></p>
 <p>We will look at examples of code to see what AI Agents are and what
@@ -232,6 +229,14 @@ and AI Programming because it can seem like it is another different
 world of dev.</p>
 <p>What if AI Agents were ‘just’ Python code with a REST API call,
 admittedly a very magical API?</p>
+<p>Then, we would use day to day Python design patterns to handle the
+responses we get back from the AI Agent and move on to the next
+step.</p>
+<p>This is the main focus of the talk - demystify and simplify - and not
+to focus on an actual real workd application.</p>
+<p>With that in mind, we don’t need to fully grasp the code this time
+around. It is more about see the high level view and once can dig deeper
+into the code offline.</p>
 <h2 id="180-degrees">180 degrees</h2>
 <p><img src="./images/mouse-up.jpg" alt="mouse up" /> <img
 src="./images/mouse-down.jpg" alt="mouse down" /></p>
@@ -251,6 +256,8 @@ code.</li>
 a REST API a request is sending a payload of data to a server and then
 the server returns a response. This is a very simple example of a REST
 API.</p>
+<p>Again, this is to demystify and simplify any libraries we may import
+for convenience functions.</p>
 <p>Authentication takes place by passing some sort of token to the
 server, usually in the headers:</p>
 <pre><code>model = &quot;gpt-3.5-turbo&quot;
@@ -283,8 +290,8 @@ objects or other data types.</p>
 <p>In Python we stringify the data with json.dumps() and in JS it is
 common to use json.stringify() to send the request.</p>
 <p>Likewise, we get a string response.</p>
-<p>We will look at <code>00_base.ipynb</code> to see an example of
-getting a response from the LLM.</p>
+<p>We will look at <code>01_openai_api_with_requests.ipynb</code> to see
+an example of getting a response from the LLM.</p>
 <p><code>01_openai_api_with_requests.ipynb</code>.</p>
 <p><em>There is only one endpoint.</em> We don’t use other endpoints for
 differing tasks, there is just one end point and we create our custom
@@ -293,15 +300,18 @@ endpoint through prompt engineering.</p>
 can see that we can get a joke from a regular API endpoint, with the
 assumption that there is no AI involved!</p>
 <p>We can also ask OpenAI to tell us a joke…</p>
-<p>What if we want a more complex endpoint?</p>
+<p>What if we want a more complex API endpoint/route?</p>
 <p>Let’s say we want to get a joke, get a rating as well as a verdict on
-whether it is worthy of publishing or whether a HUMAN should tell us the
-joke.</p>
+whether it is worthy of publishing or whether a HUMAN should make the
+joke for publishing.</p>
 <p>We can do this by using a prompt.</p>
 <p>The prompt is the input to the AI agent.</p>
+<p>The prompt can be considered to be the API route we are creating and
+it it will be in Natural Language.</p>
+<p>Let’s look at this file…</p>
 <p>We can see this in
 <code>01_openai_api_with_requests_with_prompt.ipynb</code> where we pass
-a system prompt and then a propmt to create this endpoint, specifying
+a system prompt and then a prompt to create this endpoint, specifying
 how we want the data returned.</p>
 <p>For instructional purposes, I have wrapped the JSON schema in pipes
 to help with extraction. We will look at the issue of Structured Output
@@ -316,7 +326,6 @@ demoed as hacks or tricks. Nowdays, it seems far more structured and
 different LLMs use different schemas.</p>
 <p>We can think of it as pseudo-code which we may write whilst
 developing an app.</p>
-<p>(Examples…)</p>
 <p>In fact, it is like a person starting a new job. They will get a
 handbook of what the job involves, how to do it etc. and this is what we
 are doing with the LLM.</p>
@@ -389,7 +398,7 @@ select the best report and run it.</p>
 <p>When they said “And replace me out of a job!” I said “yes..you will
 have a new job as head of the AI dept team”.</p>
 <p>Let’s look at <code>04_agent_router.ipynb</code> as a very basic
-example of what they could do…I have included aditional non-relevant
+example of what they could do…I have included additional non-relevant
 reports/actions for demonstration purposes.</p>
 <p>We have not yet seen a multi agent scenario but I would describe this
 as everyday Python where we can use a range of Software Design Patterns
@@ -401,46 +410,47 @@ us. At the end of the day, everything in Python is an OBJECT, so we can
 use whatever we want.</p>
 <h1 id="tools">Tools</h1>
 <p><code>05_tools.ipynb</code> shows not just how we define tools but
-also how an Agent can decide which one to take. It is another example of
-the Router pattern. This can be refactored into separate Ai Agents to be
-more Pythonic but there are cases where we might want an AI Agent to
-have a range of tools availabe rather than route to another Agent. It is
-the classic case of how much refactoring serves us best.</p>
-<p>Let’s go through this example.</p>
+also how an Agent can decide which one to use.</p>
+<p>It will then send back the function name and arguments for us to run
+and then return the result.</p>
 <p>Where is it run?</p>
 <h2 id="from-openai-website">From OpenAI website</h2>
+<p>Function is run on our ‘box’ - we continue to add messages to our
+list of messages and send them to the LLM.</p>
 <p><img src="./images/where-tools-are-executed.png" alt="open-ai" /></p>
-<p>We add more messages to pass on the next request.</p>
-<h1 id="react">ReAct</h1>
-<p>A powerful pattern is the ReasonAct pattern.</p>
-<p>This can be viewed of as Multi-Step. Let’s go through the code.</p>
-<h1 id="reflection-pattern">Reflection Pattern</h1>
+<h1 id="4-main-patterns">4 main patterns</h1>
+<p>Andrew Ng describes four main patterns</p>
+<p>https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/</p>
+<p><img src="./images/4-patterns.png" alt="patterns" /></p>
+<p>We have seen examples of these in this talk, bar a multi-agent
+pattern.</p>
+<h2 id="reflection-pattern">REFLECTION PATTERN</h2>
 <p>Many times when we use ChatGPT say, we ask for it to refine its
 previous answer. This is the Reflection pattern where we send the
 previous response and then ask it to refine it.</p>
-<p><code>25_reflection_pattern.ipynb</code> shows how we can use this
+<p><code>20_reflection_pattern.ipynb</code> shows how we can use this
 pattern.</p>
-<h1 id="libraries">Libraries</h1>
+<h2 id="tool">TOOL</h2>
+<p>We have seen Tool Calling previously.</p>
+<h2 id="planning">PLANNING</h2>
+<p>A powerful pattern is the ReAct (Reason-Act) pattern.</p>
+<p>This can be viewed of as Multi-Step. Let’s go through the code.</p>
+<h2 id="multi-agent">MULTI AGENT</h2>
+<h3 id="libraries">Libraries</h3>
 <p>I like to think of Libraries as frameworks without the framework! By
 this I mean we get building blocks to help us build things without
 having to conform to a building plan.</p>
-<h2 id="pydantic-ai">Pydantic AI</h2>
+<h4 id="pydantic-ai">Pydantic AI</h4>
 <p>Pydantic is well known in everyday Python and is used by most AI
 Agent frameworks as structured data validation is vital.</p>
 <p>PydanticAI is a library/framework that uses Pydantic to create AI
 Agents.</p>
-<h2 id="huggingface-smolagents">Huggingface SmolAgents</h2>
+<h4 id="huggingface-smolagents">Huggingface SmolAgents</h4>
 <p>HF SmolAgents is a library/framework that uses Huggingface
 Transformers to create AI Agents. It has broken new ground throught the
 use of its CodeAgent where tool calling is done via Python rather than
 JSON…show images…</p>
-<h2 id="frameworks">Frameworks</h2>
-<p>There are many frameworks and libraries that can be used to create AI
-Agents. Some are more focused on the AI Agent and some are more focused
-on the UI.</p>
-<p>LlamaIndex Langchain Langraph AutoGen CrewAI</p>
-<p>And there are many low/no code versions.</p>
-<h2 id="crewsswarms">Crews/Swarms</h2>
+<h3 id="crewsswarms">Crews/Swarms</h3>
 <p>Crews and Swarms are design patterns for MultiAgent collaboration.
 They each have their own use cases and we saw earlier that AI Agents can
 emit the ‘next’ step in the app which a range of desing patterns can
@@ -448,16 +458,18 @@ harness.</p>
 <ul>
 <li>https://aiagentsdirectory.com/category/ai-agents-frameworks</li>
 </ul>
-<h2 id="4-main-patterns">4 main patterns</h2>
-<p>Andrew Ng describes four main patterns</p>
-<p>https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/</p>
-<p><img src="./images/4-patterns.png" alt="patterns" /></p>
-<p>We have seen examples of these in this talk, bar a multi-agent
-pattern.</p>
+<h2 id="frameworks">Frameworks</h2>
+<p>There are many frameworks and libraries that can be used to create AI
+Agents. Some are more focused on the AI Agent and some are more focused
+on the UI.</p>
+<p>LlamaIndex Langchain Langraph AutoGen CrewAI</p>
+<p>And there are many low/no code versions.</p>
 <h1 id="summary">Summary</h1>
 <p>I hope AI Agents have been demystified and helped us understand what
 they can do, enabling us to either build our own frameworks or use
 existing ones, with a deeper appreciation and understanding of how they
 work.</p>
+<p><img src="./images/when-to-use-anthropic.png"
+alt="when to use" /></p>
 </body>
 </html>
