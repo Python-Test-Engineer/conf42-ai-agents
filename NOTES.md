@@ -143,7 +143,7 @@ We will look at `01_openai_api_with_requests.ipynb` to see an example of getting
 
 *There is only one endpoint.* We don't use other endpoints for differing tasks, there is just one end point and we create our custom endpoint through prompt engineering.
 
-in `01_openai_api_with_requests_with_endpoint.ipynb`, we can see that we can get a joke from a regular API endpoint, with the assumption that there is no AI involved!
+In `02_api.ipynb`, we can see that we can get a joke from a regular API endpoint, with the assumption that there is no AI involved!
 
 We can also ask OpenAI to tell us a joke...
 
@@ -159,9 +159,7 @@ The prompt can be considered to be the API route we are creating and it it will 
 
 Let's look at this file...
 
-We can see this in `01_openai_api_with_requests_with_prompt.ipynb` where we pass a system prompt and then a prompt to create this endpoint, specifying how we want the data returned.
-
-For instructional purposes, I have wrapped the JSON schema in pipes to help with extraction. We will look at the issue of Structured Output later, but for now I will use this. Structured Ouput is a very critical aspect of AI Agents as this enables effective chaining from one AI Agent to another.
+We can see this in `02_api.ipynb` where we pass a system prompt and then a prompt to create this endpoint, specifying how we want the data returned.
 
 This is effectively a new route for the API, but instead of it being coded on the server side by someone, it is coded on the client side, sent with the payload AND the code is NATURAL LANGUAGE.
 
@@ -258,7 +256,11 @@ We have seen examples of these in this talk, bar a multi-agent pattern.
 
 Many times when we use ChatGPT say, we ask for it to refine its previous answer. This is the Reflection pattern where we send the previous response and then ask it to refine it.
 
-`20_reflection_pattern.ipynb` shows how we can use this pattern.
+In fact, it is like RAG. The first request generates some content, which we then add to the next request which has a system prompt of being a critique.
+
+We can repeat this as many times as we want, adding previous responses to the next request.
+
+`15_reflection_pattern.ipynb` shows how we can use this pattern.
 
 ## TOOL
 
