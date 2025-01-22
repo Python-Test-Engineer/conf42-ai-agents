@@ -119,7 +119,10 @@ def loop(max_iterations=10, query: str = ""):
     i = 0
     while i < max_iterations:
         i += 1
+        # This is the AI bit
+        # -------------------------
         result = agent(next_prompt)
+        # -------------------------
         if "ACTION" in result:
 
             next = result.split("|")
