@@ -29,6 +29,7 @@ class Agent:
             self.messages.append({"role": "system", "content": system})
 
     def __call__(self, message=""):
+        """Sets the message and executes the agent"""
         if message:
             self.messages.append({"role": "user", "content": message})
             result = self.execute()
@@ -38,31 +39,28 @@ class Agent:
             print("NO MESSAGE")
 
     def execute(self):
+        """Executes the ageLLM request and returns the result"""
         completion = client.chat.completions.create(model=MODEL, messages=self.messages)
         return completion.choices[0].message.content
 
 
 system_prompt = """
+
 You run in a loop of THOUGHT, ACTION, OBSERVATION.
-When you have a THOUGHT you return the THOUGHT and ACTION
-At the end of the loop you output an ANSWER
-Use THOUGHT to describe your THOUGHTS about the question you have been asked.
-Use ACTION to run one of the ACTIONS available to you - then return PAUSE.
-OBSERVATION will be the result of running those ACTIONS.
 
-Your available ACTIONS are:
+You have two tools available for your ACTIONS - calculate_total and get_product_price so that you can get the total price of an item requested by the user.
 
-# calculate_total:
+
+# 1. calculate_total:
 
 if amount = 200
 then calculate_total(amount)
-
-This returns amount * 1.2
+return amount * 1.2
 
 Runs the calculate_total function and returns a JSON FORMAT output as follows:
 {"result": 240, "fn": "calculate_total", "next": "PAUSE"}
 
-# get_product_price:
+# 2. get_product_price:
 
 This uses the get_product_price function and passes in the value of the product
 e.g. get_product_price('bike')
@@ -70,27 +68,26 @@ e.g. get_product_price('bike')
 This uses the get_product_price with a product = 'bike', finds the price of the bike and then returns a JSON FORMAT output as follows:
 {"result": 200, "fn": "get_product_price", "next": "PAUSE"}
 
-Example session:
+Here is an example session:
 
-Question: What is total cost of a bike including VAT?
-THOUGHT: I need to find the cost of a bike|ACTION|get_product_price|bike
+User Question: What is total cost of a bike including VAT?
 
-You will be called again with this:
 
-OBSERVATION|200
+AI Response: THOUGHT: I need to find the cost of a bike|ACTION|get_product_price|bike
+
+You will be called again with the result of get_product_price as the OBSERVATION and will have OBSERVATION|200 sent as another LLM query along with previous messages.
+
+Then the next message will be:
 
 THOUGHT: I need to calculate the total including the VAT|ACTION|calculate_total|200
 
-You will be called again with this: 
+The result wil be passed as another query as OBSERVATION|240 along with previous messages.
 
-OBSERVATION|240
-
-If you have the ANSWER, output it as the ANSWER.
+If you have the ANSWER, output it as the ANSWER in this format:
 
 ANSWER|The price of the bike including VAT is 240
 
-Now it's your turn:
-""".strip()
+"""
 
 
 def calculate_total(amount):
@@ -118,6 +115,7 @@ def loop(max_iterations=10, query: str = ""):
     agent = Agent(client=client, system=system_prompt)
     tools = ["calculate_total", "get_product_price"]
     next_prompt = query
+    print("\nSTARTING LOOP...\n")
     i = 0
     while i < max_iterations:
         i += 1
@@ -133,13 +131,16 @@ def loop(max_iterations=10, query: str = ""):
                 result_tool = eval(f"{next_function}('{next_arg}')")
                 next_prompt = f"OBSERVATION: {result_tool}"
                 print(next_prompt)
+                print("------------------------------\n")
             else:
                 next_prompt = "OBSERVATION: Tool not found"
             continue
 
         if "ANSWER" in result:
             # the result at top has final result
-            print(f"Answer found:\n\t{result}")
+            print("======================================")
+            print(f"Answer found:\n\t{result}\n")
+            print("======================================")
             answers.append(result)
             break
 
