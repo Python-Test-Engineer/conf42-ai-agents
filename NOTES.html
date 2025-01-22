@@ -309,15 +309,9 @@ joke for publishing.</p>
 <p>The prompt can be considered to be the API route we are creating and
 it it will be in Natural Language.</p>
 <p>Let’s look at this file…</p>
-<p>We can see this in
-<code>01_openai_api_with_requests_with_prompt.ipynb</code> where we pass
-a system prompt and then a prompt to create this endpoint, specifying
-how we want the data returned.</p>
-<p>For instructional purposes, I have wrapped the JSON schema in pipes
-to help with extraction. We will look at the issue of Structured Output
-later, but for now I will use this. Structured Ouput is a very critical
-aspect of AI Agents as this enables effective chaining from one AI Agent
-to another.</p>
+<p>We can see this in <code>02_api.ipynb</code> where we pass a system
+prompt and then a prompt to create this endpoint, specifying how we want
+the data returned.</p>
 <p>This is effectively a new route for the API, but instead of it being
 coded on the server side by someone, it is coded on the client side,
 sent with the payload AND the code is NATURAL LANGUAGE.</p>
@@ -428,7 +422,12 @@ pattern.</p>
 <p>Many times when we use ChatGPT say, we ask for it to refine its
 previous answer. This is the Reflection pattern where we send the
 previous response and then ask it to refine it.</p>
-<p><code>20_reflection_pattern.ipynb</code> shows how we can use this
+<p>In fact, it is like RAG. The first request generates some content,
+which we then add to the next request which has a system prompt of being
+a critique.</p>
+<p>We can repeat this as many times as we want, adding previous
+responses to the next request.</p>
+<p><code>15_reflection_pattern.ipynb</code> shows how we can use this
 pattern.</p>
 <h2 id="tool">TOOL</h2>
 <p>We have seen Tool Calling previously.</p>
